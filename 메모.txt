@@ -1,0 +1,12 @@
+전체적으로 스타일 주기
+
+모든 데이터 스타일을 한번에 변경 할 수 있다.
+      MaterialApp(
+          //전체적으로 스타일 주기!!
+          theme: ThemeData(
+            iconTheme : IconThemeData(color: Colors.blue),
+            appBarTheme: AppBarTheme(color: Colors.grey , actionsIconTheme: IconThemeData(color: Colors.red)),
+            textTheme: TextTheme(bodyText2: TextStyle(color : Colors.red))
+          ),
+          home: MyAPP())
+
