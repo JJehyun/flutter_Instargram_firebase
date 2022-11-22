@@ -1,12 +1,7 @@
-전체적으로 스타일 주기
+다른 폴더로 분리하기!!
+1.var 변수 = 긴 코드 (다른.dart)
+2.main에서 import해야함
+끝 바로 사용하면 됨!!
 
-모든 데이터 스타일을 한번에 변경 할 수 있다.
-      MaterialApp(
-          //전체적으로 스타일 주기!!
-          theme: ThemeData(
-            iconTheme : IconThemeData(color: Colors.blue),
-            appBarTheme: AppBarTheme(color: Colors.grey , actionsIconTheme: IconThemeData(color: Colors.red)),
-            textTheme: TextTheme(bodyText2: TextStyle(color : Colors.red))
-          ),
-          home: MyAPP())
+
 

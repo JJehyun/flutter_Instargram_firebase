@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-
+import './style.dart';
 void main() {
   runApp(
       MaterialApp(
-          //전체적으로 스타일 주기!!
-          theme: ThemeData(
-            iconTheme : IconThemeData(color: Colors.blue),
-            appBarTheme: AppBarTheme(color: Colors.grey , actionsIconTheme: IconThemeData(color: Colors.red)),
-            textTheme: TextTheme(bodyText2: TextStyle(color : Colors.red))
-          ),
+          theme: theme,
           home: MyAPP())
   );
 }
@@ -19,9 +14,13 @@ class MyAPP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(actions: [Icon(Icons.star)],),
-      body: Icon(Icons.star)
+      appBar: AppBar(
+        title: Text('Instagram'),
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.add_box_outlined),iconSize: 30,)
+        ],
+      ),
+      body: TextButton(onPressed: (){},child:Text("버튼"))
     );
-
   }
 }
