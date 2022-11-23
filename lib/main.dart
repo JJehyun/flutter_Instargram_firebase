@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import './style.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter/rendering.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
-//Navigator 활용
+//사진꺼내 사용하기!!
 void main() {
   runApp(
       MaterialApp(
@@ -23,7 +24,7 @@ class MyAPP extends StatefulWidget {
 class _MyAPPState extends State<MyAPP> {
   var tab = 0;
   var data = [];
-
+  var userImage;
   getDate() async{
     var result = await http.get( Uri.parse('https://codingapple1.github.io/app/data.json'));
     var result2 = jsonDecode(result.body);
@@ -44,15 +45,21 @@ class _MyAPPState extends State<MyAPP> {
       appBar: AppBar(
         title: Text('Instagram'),
         actions: [
-          //앱 버튼 클릭 시 새로운 창 띄우기  Navigator.push
-    //       IconButton(onPressed: (){
-    //        Navigator.push(context,
-    //        MaterialPageRoute(builder: (c){return Text("새 페이지임")})
-    //        );
-    //        } 새 창띄우는 코드
-          IconButton(onPressed: (){
+          IconButton(onPressed: ()async{
+            //갤러리에서 이미지를 가져오는 함수!!picker에 ImagePicker객체를 담아서 사용
+            var picker = ImagePicker();
+            var image = await picker.pickImage(source: ImageSource.gallery);
+            //유저가 선택한 이미지를 userImage이라는 state에 저장한 것
+            if(image !=null){
+              setState(() {
+                userImage = File(image.path);   //이미지의 경로를 저장한 것!!
+              });
+            }
+
+            // Image.file(userImage);//state에 저장한 이미지 파일 경로를 사용해서 파일을 보여줌!!
+
             Navigator.push(context, 
-              MaterialPageRoute(builder: (context){return Upload();})
+              MaterialPageRoute(builder: (context){return Upload(userImage:userImage);})
             );
           }, icon: Icon(Icons.add_box_outlined),iconSize: 30,)
         ],
@@ -137,7 +144,8 @@ class _HomeState extends State<Home> {
 
 
 class Upload extends StatelessWidget {
-  const Upload({Key? key}) : super(key: key);
+  const Upload({Key? key , this.userImage}) : super(key: key);
+  final userImage;
   @override
 
   Widget build(BuildContext context) {
@@ -146,9 +154,9 @@ class Upload extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Image.file(userImage),
             Text('이미지업로드화면'),
             IconButton(
-                //창을 닫아주는 함수!!!
                 onPressed: (){Navigator.pop(context);},
                 icon: Icon(Icons.close)
             ),
