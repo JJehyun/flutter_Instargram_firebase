@@ -1,19 +1,13 @@
-무한 스크롤 사용하기
-1.import 'package:flutter/rendering.dart';
-StatefulWidget 에서 받은 프로퍼티는 widget.부모한테 받은 state로 사용함!!
+            위는 새창을 아래서 위로 띄우는 코드
+          IconButton(onPressed: (){
+            Navigator.push(context,
+              MaterialPageRoute(builder: (c){return Text("새 페이지임")})
+            );
+          }
 
-2.var scroll = ScrollController(); //스크롤에 관한 정보를 담음
 
-3.ListView.builder(itemCount: 3,controller: scroll, itemBuilder: (c, i){ ListView에 관련된 스크롤 정보를 저장함
 
-4. 스크롤이 움직일 때마다 addListener로 특정함수를 사용함
+            창을 닫아주는 함수!!
+            onPressed: (){Navigator.pop(context);}
 
-  @override
-  void initState(){
-    super.initState();
-    scroll.addListener(() {
-      if(scroll.position.pixels == scroll.position.maxScrollExtent){
-        print("스크롤을 끝까지 내림");
-      }
-    });
-  }
+

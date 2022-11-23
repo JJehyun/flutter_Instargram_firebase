@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/rendering.dart';
 
-//데이터 도착전에 로딩중 창 띄우기
+//Navigator 활용
 void main() {
   runApp(
       MaterialApp(
@@ -44,7 +44,17 @@ class _MyAPPState extends State<MyAPP> {
       appBar: AppBar(
         title: Text('Instagram'),
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.add_box_outlined),iconSize: 30,)
+          //앱 버튼 클릭 시 새로운 창 띄우기  Navigator.push
+    //       IconButton(onPressed: (){
+    //        Navigator.push(context,
+    //        MaterialPageRoute(builder: (c){return Text("새 페이지임")})
+    //        );
+    //        } 새 창띄우는 코드
+          IconButton(onPressed: (){
+            Navigator.push(context, 
+              MaterialPageRoute(builder: (context){return Upload();})
+            );
+          }, icon: Icon(Icons.add_box_outlined),iconSize: 30,)
         ],
       ),
       body: [Home(data : data),Text("샵페이지")][tab],
@@ -84,7 +94,7 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 class _HomeState extends State<Home> {
-  var scroll = ScrollController(); //스크롤에 관한 정보를 담음
+  var scroll = ScrollController(); 
 
   @override
   void initState(){
@@ -99,7 +109,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
   if(widget.data.isNotEmpty){
-    return ListView.builder(itemCount: 3,controller: scroll, itemBuilder: (c, i){ //여기서 사용 스크롤 정보
+    return ListView.builder(itemCount: 3,controller: scroll, itemBuilder: (c, i){
       return Column(
         children: [
           Image.network(widget.data[i]['image']),
@@ -122,8 +132,29 @@ class _HomeState extends State<Home> {
   }else{
     return Text("로딩 중이에요!");
   }
-
-
   }
 }
 
+
+class Upload extends StatelessWidget {
+  const Upload({Key? key}) : super(key: key);
+  @override
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('이미지업로드화면'),
+            IconButton(
+                //창을 닫아주는 함수!!!
+                onPressed: (){Navigator.pop(context);},
+                icon: Icon(Icons.close)
+            ),
+          ],
+        )
+    );
+
+  }
+}
