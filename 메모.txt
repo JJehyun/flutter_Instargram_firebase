@@ -1,17 +1,24 @@
-tab만들기
-1. state에 tab현재 상태 저장
-2.state 상태에 따라 어떻게 보일지 작성
-3.유저가 쉽게 state 조작할 수 있게 지원
+stll -> tab하면 커스텀 위젯 만들어줌
+서버에서 데이터 가져오는 법
+1.pubspec파일 > dependencies > http: ^0.13.4 이거 넣어서 라이브러리 설치
+2. android/app/src/main/AndroidManifest.xml 파일에서
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.flutterinsta">
 
-1. var tab = 0;
-2. [Text("홈"),Text("샵페이지")][tab]  tab이 순서대로 선택되어서 뷰가 보여짐
-3.bottomNavigationBar: BottomNavigationBar(
-        onTap: (index){
-          setState(() {
-            tab = index;
-          });
-        }
-) //ontab으로 상태 변경
+    <uses-permission android:name="android.permission.INTERNET" /> --> 추가하면 끝
 
-[Text("홈"),Text("샵페이지")][1] --> 샵페이지 보임
-[Text("홈"),Text("샵페이지")][0] --> 홈페이지 보임
+
+
+
+
+   1.데이터를 받아오는 함수 데이터를 받아오기 전까지 기다라는 뜻 await    ||   jsonDecode(result.body)json 자료 쉽게 다루기
+      getDate() async{
+        var result = await http.get( Uri.parse('https://codingapple1.github.io/app/data.json'));
+        var result2 = jsonDecode(result.body);
+      }
+   2.앱이 처음 로드되었을때 시작되는 것--initState (async붙일 수 없음)
+      @override
+      void initState(){
+        super.initState();
+        getDate();
+      }
