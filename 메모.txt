@@ -1,24 +1,20 @@
-stll -> tab하면 커스텀 위젯 만들어줌
-서버에서 데이터 가져오는 법
-1.pubspec파일 > dependencies > http: ^0.13.4 이거 넣어서 라이브러리 설치
-2. android/app/src/main/AndroidManifest.xml 파일에서
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutterinsta">
+데이터가 도착하기 전에 기다리게 하기!!
+데이터 도착전에 로딩 창 띄우기!!
 
-    <uses-permission android:name="android.permission.INTERNET" /> --> 추가하면 끝
+1. 서버 도착전에 창 띄우기
+ if(data.isNotEmpty){
+    데이터가 도착 했으면 이거 보여줌
+  }else{
+    데이터가 도착 안했으면 이거 보여줌
+    return Text("로딩 중이에요!");
+  }
 
 
+  2. 통신이 잘되었는지 확인
+      if(result.statusCode == 200){
 
+      }else{
 
-
-   1.데이터를 받아오는 함수 데이터를 받아오기 전까지 기다라는 뜻 await    ||   jsonDecode(result.body)json 자료 쉽게 다루기
-      getDate() async{
-        var result = await http.get( Uri.parse('https://codingapple1.github.io/app/data.json'));
-        var result2 = jsonDecode(result.body);
       }
-   2.앱이 처음 로드되었을때 시작되는 것--initState (async붙일 수 없음)
-      @override
-      void initState(){
-        super.initState();
-        getDate();
-      }
+
+  3.
