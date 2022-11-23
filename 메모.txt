@@ -1,7 +1,17 @@
-다른 폴더로 분리하기!!
-1.var 변수 = 긴 코드 (다른.dart)
-2.main에서 import해야함
-끝 바로 사용하면 됨!!
+tab만들기
+1. state에 tab현재 상태 저장
+2.state 상태에 따라 어떻게 보일지 작성
+3.유저가 쉽게 state 조작할 수 있게 지원
 
+1. var tab = 0;
+2. [Text("홈"),Text("샵페이지")][tab]  tab이 순서대로 선택되어서 뷰가 보여짐
+3.bottomNavigationBar: BottomNavigationBar(
+        onTap: (index){
+          setState(() {
+            tab = index;
+          });
+        }
+) //ontab으로 상태 변경
 
-
+[Text("홈"),Text("샵페이지")][1] --> 샵페이지 보임
+[Text("홈"),Text("샵페이지")][0] --> 홈페이지 보임
