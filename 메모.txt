@@ -1,20 +1,19 @@
-데이터가 도착하기 전에 기다리게 하기!!
-데이터 도착전에 로딩 창 띄우기!!
+무한 스크롤 사용하기
+1.import 'package:flutter/rendering.dart';
+StatefulWidget 에서 받은 프로퍼티는 widget.부모한테 받은 state로 사용함!!
 
-1. 서버 도착전에 창 띄우기
- if(data.isNotEmpty){
-    데이터가 도착 했으면 이거 보여줌
-  }else{
-    데이터가 도착 안했으면 이거 보여줌
-    return Text("로딩 중이에요!");
-  }
+2.var scroll = ScrollController(); //스크롤에 관한 정보를 담음
 
+3.ListView.builder(itemCount: 3,controller: scroll, itemBuilder: (c, i){ ListView에 관련된 스크롤 정보를 저장함
 
-  2. 통신이 잘되었는지 확인
-      if(result.statusCode == 200){
+4. 스크롤이 움직일 때마다 addListener로 특정함수를 사용함
 
-      }else{
-
+  @override
+  void initState(){
+    super.initState();
+    scroll.addListener(() {
+      if(scroll.position.pixels == scroll.position.maxScrollExtent){
+        print("스크롤을 끝까지 내림");
       }
-
-  3.
+    });
+  }
