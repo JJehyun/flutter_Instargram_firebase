@@ -1,4 +1,4 @@
-# flutterinsta
+# flutter
 
 A new Flutter project.
 
